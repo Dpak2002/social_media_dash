@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+*.sqlite3
+
+# Django
+db.sqlite3
+/static/
+media/
+local_settings.py
+
+# VS Code / PyCharm
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env files
+.env*
+*.log
+
+# Migrations (optional)
+*/migrations/*.pyc
+*/migrations/__pycache__/

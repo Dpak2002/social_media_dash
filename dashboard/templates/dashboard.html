@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+    {% if error %}
+    <div class="alert alert-danger text-center justify-content-center justify-content-center">{{ error }}</div>
+    {% else %}
+    {% if user %}
+    <!-- User Header -->
+    <div class="d-flex align-items-center mb-4">
+        <img src="{{ user.profile_image_url }}" alt="Profile" class="rounded-circle me-3" width="60" height="60">
+        <div>
+            <a class="" href="/profile/"><h5 class="mb-0">{{ user.name }}</h5></a>
+            <p class="text-muted mb-0">@{{ user.username }}</p>
+        </div>
+    </div>
+    
+    <!-- Tweet Feed -->
+    {% for tweet in tweets %}
+    <div class="card shadow-sm rounded-4 mb-4">
+        <div class="card-body">
+            <!-- Post Header -->
+            <div class="d-flex align-items-center mb-3">
+                <img src="{{ user.profile_image_url }}" alt="User" class="rounded-circle me-2" width="45" height="45">
+                <div>
+                    <strong>{{ user.name }}</strong>
+                    <div class="text-muted small">@{{ user.username }} · {{ tweet.created_at|date:"M d, Y H:i" }}</div>
+                </div>
+            </div>
+    
+            <!-- Post Text -->
+            <p>{{ tweet.text }}</p>
+    
+            <!-- Post Media -->
+            {% if tweet.media %}
+            <div class="mb-3">
+                {% for media in tweet.media %}
+                {% if media.url %}
+                <img src="{{ media.url }}" alt="Tweet Image" class="img-fluid rounded-3">
+                {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
+    
+            <!-- Post Actions -->
+            <div class="d-flex text-muted justify-content-start small">
+                <div class="me-4">
+                    <i class="bi bi-heart me-1"></i> {{ tweet.likes }} Likes
+                </div>
+                <div>
+                    <i class="bi bi-chat-dots me-1"></i> {{ tweet.comments }} Comments
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p class="text-muted">No tweets found.</p>
+    {% endfor %}
+    {% endif %}
+    {% endif %}
+
+    
+</div>
+{% endblock %}
